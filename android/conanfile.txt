@@ -1,0 +1,9 @@
+[requires]
+glm/0.9.9.8
+
+[generators]
+cmake
+
+[imports]
+bin, *.dll -> ./build/bin
+lib, *.dylib* -> ./build/bin

@@ -1,0 +1,87 @@
+#version 450
+
+struct Particle {
+  mat2 C;
+  vec2 pos;
+  vec2 vel;
+  float mass;
+  float volume_0;
+  vec2 padding;
+};
+
+struct Cell {
+  vec2 vel;
+  float mass;
+  float padding;
+};
+
+layout(local_size_x = 256) in;
+layout(set = 0, binding = 0) buffer Pos { Particle particles[]; };
+layout(set = 0, binding = 1) buffer readonly cells { Cell grid[]; };
+layout(set = 0, binding = 2) buffer deformationGradient { mat2 Fs[]; };
+layout(set = 0, binding = 3) uniform UBO {
+  float deltaT;
+  float particleCount;
+  float elastic_lambda;
+  float elastic_mu;
+}
+ubo;
+
+const int GRID_RESOLUTION = 64;
+const float GRAVITY       = 0.3;
+
+void main() {
+  int index  = int(gl_GlobalInvocationID);
+  Particle p = particles[index];
+
+  // reset particle velocity. we calculate it from scratch each step using the grid
+  p.vel = vec2(0.0);
+
+  // quadratic interpolation weights
+  const ivec2 cell_idx  = ivec2(p.pos);
+  const vec2 cell_diff  = (p.pos - cell_idx) - 0.5;
+  const vec2 weights[3] = {
+      0.5 * ((0.5 - cell_diff) * (0.5 - cell_diff)),
+      0.75 - (cell_diff * cell_diff),
+      0.5 * ((0.5 + cell_diff) * (0.5 + cell_diff)),
+  };
+
+  // constructing affine per-particle momentum matrix from APIC / MLS-MPM.
+  // see APIC paper (https://web.archive.org/web/20190427165435/https://www.math.ucla.edu/~jteran/papers/JSSTS15.pdf),
+  // page 6 below equation 11 for clarification. this is calculating C = B * (D^-1) for APIC equation 8, where B is
+  // calculated in the inner loop at (D^-1) = 4 is a constant when using quadratic interpolation functions
+  mat2 B = mat2(0.0);
+  for (int gx = 0; gx < 3; ++gx) {
+    for (int gy = 0; gy < 3; ++gy) {
+      float weight = weights[gx].x * weights[gy].y;
+
+      ivec2 cell_x   = ivec2(cell_idx.x + gx - 1, cell_idx.y + gy - 1);
+      int cell_index = cell_x.x * GRID_RESOLUTION + cell_x.y;
+
+      vec2 dist              = (cell_x - p.pos) + 0.5;
+      vec2 weighted_velocity = grid[cell_index].vel * weight;
+
+      // APIC paper equation 10, constructing inner term for B
+      mat2 term = mat2(weighted_velocity * dist.x, weighted_velocity * dist.y);
+
+      B += term;
+
+      p.vel += weighted_velocity;
+    }
+  }
+  p.C = B * 4;
+
+  {
+    // advect particles
+    p.pos += p.vel * ubo.deltaT;
+
+    // safety clamp to ensure particles don't exit simulation domain
+    p.pos = clamp(p.pos, 1, GRID_RESOLUTION - 2);
+
+    mat2 Fp_new = mat2(1);
+    Fp_new += ubo.deltaT * p.C;
+    Fs[index] = Fp_new * Fs[index];
+
+    particles[index] = p;
+  }
+}

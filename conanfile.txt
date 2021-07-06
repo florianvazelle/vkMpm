@@ -1,0 +1,13 @@
+[requires]
+glslang/8.13.3559
+cxxopts/2.2.1
+
+[generators]
+cmake
+cmake_find_package
+
+[imports]
+bin, *.dll -> ./build/bin
+lib, *.dylib* -> ./build/bin
+./bin, glslangValidator -> ./bin
+./bin, glslangValidator.exe -> ./bin

@@ -1,0 +1,50 @@
+#version 450
+
+struct Particle {
+  mat2 C;
+  vec2 pos;
+  vec2 vel;
+  float mass;
+  float volume_0;
+  vec2 padding;
+};
+
+struct Cell {
+  vec2 vel;
+  float mass;
+  float padding;
+};
+
+layout(local_size_x = 256) in;
+layout(set = 0, binding = 0) buffer readonly Pos { Particle particles[]; };
+layout(set = 0, binding = 1) buffer cells { Cell grid[]; };
+layout(set = 0, binding = 2) buffer readonly deformationGradient { mat2 Fs[]; };
+layout(binding = 3) uniform UBO {
+  float deltaT;
+  float particleCount;
+  float elastic_lambda;
+  float elastic_mu;
+}
+ubo;
+
+const int GRID_RESOLUTION = 64;
+const float GRAVITY       = 0.3;
+
+void main() {
+  int index = int(gl_GlobalInvocationID);
+  Cell cell = grid[index];
+
+  if (cell.mass > 0) {
+    // convert momentum to velocity, apply GRAVITY
+    cell.vel /= cell.mass;
+    cell.vel += ubo.deltaT * vec2(0.0, GRAVITY);
+
+    // 'slip' boundary conditions
+    int x = int(index) / GRID_RESOLUTION;
+    int y = int(index) % GRID_RESOLUTION;
+    if (x < 2 || x > GRID_RESOLUTION - 3) cell.vel.x = 0;
+    if (y < 2 || y > GRID_RESOLUTION - 3) cell.vel.y = 0;
+
+    grid[index] = cell;
+  }
+}

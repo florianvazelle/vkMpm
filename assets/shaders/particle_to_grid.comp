@@ -1,0 +1,112 @@
+#version 450
+
+struct Particle {
+  mat2 C;
+  vec2 pos;
+  vec2 vel;
+  float mass;
+  float volume_0;
+  vec2 padding;
+};
+
+struct Cell {
+  vec2 vel;
+  float mass;
+  float padding;
+};
+
+layout(local_size_x = 1) in;
+layout(set = 0, binding = 0) buffer readonly Pos { Particle particles[]; };
+layout(set = 0, binding = 1) buffer cells { Cell grid[]; };
+layout(set = 0, binding = 2) buffer readonly deformationGradient { mat2 Fs[]; };
+layout(binding = 3) uniform UBO {
+  float deltaT;
+  float particleCount;
+  float elastic_lambda;
+  float elastic_mu;
+}
+ubo;
+
+const int GRID_RESOLUTION = 64;
+const float GRAVITY       = 0.3;
+
+void main() {
+  for (int i = 0; i < ubo.particleCount; ++i) {
+    Particle p = particles[i];
+
+    // deformation gradient
+    mat2 F = Fs[i];
+
+    float J = determinant(F);
+
+    // MPM course, page 46
+    float volume = p.volume_0 * J;
+
+    // useful matrices for Neo-Hookean model
+    mat2 F_T             = transpose(F);
+    mat2 F_inv_T         = inverse(F_T);
+    mat2 F_minus_F_inv_T = F - F_inv_T;
+
+    // MPM course equation 48
+    mat2 P_term_0 = ubo.elastic_mu * (F_minus_F_inv_T);
+    mat2 P_term_1 = ubo.elastic_lambda * log(J) * F_inv_T;
+    mat2 P        = P_term_0 + P_term_1;
+
+    // cauchy_stress = (1 / det(F)) * P * F_T
+    // equation 38, MPM course
+    mat2 stress = (1.0 / J) * (P * F_T);
+
+    // (M_p)^-1 = 4, see APIC paper and MPM course page 42
+    // this term is used in MLS-MPM paper eq. 16. with quadratic weights, Mp = (1/4) * (delta_x)^2.
+    // in this simulation, delta_x = 1, because i scale the rendering of the domain rather than the domain itself.
+    // we multiply by ubo.deltaT as part of the process of fusing the momentum and force update for MLS-MPM
+    mat2 eq_16_term_0 = -volume * 4 * stress * ubo.deltaT;
+
+    // quadratic interpolation weights
+    const ivec2 cell_idx  = ivec2(p.pos);  // uvec2 -> unsigned
+    const vec2 cell_diff  = (p.pos - cell_idx) - 0.5;
+    const vec2 weights[3] = {
+        0.5 * ((0.5 - cell_diff) * (0.5 - cell_diff)),
+        0.75 - (cell_diff * cell_diff),
+        0.5 * ((0.5 + cell_diff) * (0.5 + cell_diff)),
+    };
+
+    // for all surrounding 9 cells
+    for (int gx = 0; gx < 3; ++gx) {
+      for (int gy = 0; gy < 3; ++gy) {
+        float weight = weights[gx].x * weights[gy].y;
+
+        ivec2 cell_x   = ivec2(cell_idx.x + gx - 1, cell_idx.y + gy - 1);
+        vec2 cell_dist = (cell_x - p.pos) + 0.5;  // cast uvec2 into vec2
+        vec2 Q         = p.C * cell_dist;
+
+        // scatter mass and momentum to the grid
+        int cell_index = cell_x.x * GRID_RESOLUTION + cell_x.y;
+        Cell cell      = grid[cell_index];
+
+        // MPM course, equation 172
+        float weighted_mass = weight * p.mass;
+        cell.mass += weighted_mass;
+
+        // APIC P2G momentum contribution
+        cell.vel += weighted_mass * (p.vel + Q);
+
+        // fused force/momentum update from MLS-MPM
+        // see MLS-MPM paper, equation listed after eqn. 28
+        vec2 momentum = (eq_16_term_0 * weight) * cell_dist;
+        cell.vel += momentum;
+
+        // total update on cell.v is now:
+        // weight * (ubo.deltaT * M^-1 * p.volume * p.stress + p.mass * p.C)
+        // this is the fused momentum + force from MLS-MPM. however, instead of our stress being derived from the energy
+        // density, i use the weak form with cauchy stress. converted: p.volume_0 * (dΨ/dF)(Fp)*(Fp_transposed) is equal
+        // to p.volume * σ
+
+        // note: currently "cell.v" refers to MOMENTUM, not velocity!
+        // this gets converted in the UpdateGrid step below.
+
+        grid[cell_index] = cell;
+      }
+    }
+  }
+}
