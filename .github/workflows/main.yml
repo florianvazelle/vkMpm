@@ -101,6 +101,7 @@ jobs:
           cmake \
             $GITHUB_WORKSPACE \
             -G Ninja \
+            -DINSTALL_APPS=ON \
             -DCMAKE_INSTALL_PREFIX="${{ runner.workspace }}/instdir"
 
       - name: Build
@@ -179,6 +180,7 @@ jobs:
         run: |
           cmake \
             $GITHUB_WORKSPACE \
+            -DINSTALL_APPS=ON \
             -DCMAKE_INSTALL_PREFIX="${{ runner.workspace }}/instdir"
 
       - name: Build
