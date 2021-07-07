@@ -4,6 +4,7 @@
 /out*
 
 /.vs
+/.vscode
 .DS_Store
 .idea/
 
