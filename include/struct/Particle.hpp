@@ -6,7 +6,7 @@
 #include <iostream>
 #include <vector>
 
-namespace vkl {
+namespace vkm {
   // Pour plus de commentaire regarder Vertex.hpp
   struct alignas(16) Particle {
     alignas(16) glm::mat2 C;   // affine momentum matrix
@@ -56,6 +56,6 @@ namespace vkl {
     }
   };
 
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // PARTICLE_HPP

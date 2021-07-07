@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-namespace vkl {
+namespace vkm {
 
   struct alignas(16) MVP {
     glm::mat4 model;
@@ -11,6 +11,6 @@ namespace vkl {
     glm::mat4 proj;
   };
 
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // UBO_HPP
