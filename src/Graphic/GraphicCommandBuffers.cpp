@@ -1,20 +1,14 @@
 // clang-format off
-#include <particle/Graphic/GraphicCommandBuffers.hpp>
+#include <Graphic/GraphicCommandBuffers.hpp>
 #include <stddef.h>                         // for size_t
 #include <stdint.h>                         // for uint32_t
-#include <common/VulkanHeader.hpp>             // for VkCommandBuffer, VkComman...
 #include <stdexcept>                        // for runtime_error
-#include <common/CommandPool.hpp>           // for CommandPool, vkl
-#include <common/DescriptorSets.hpp>        // for DescriptorSets
-#include <common/Device.hpp>                // for Device
-#include <common/GraphicsPipeline.hpp>      // for GraphicsPipeline
-#include <common/RenderPass.hpp>            // for RenderPass
-#include <common/SwapChain.hpp>             // for SwapChain
-#include <common/buffer/StorageBuffer.hpp>  // for StorageBuffer
-#include <particle/Compute/MPMStorageBuffer.hpp>
+#include <poike/poike.hpp>
+#include <Compute/MPMStorageBuffer.hpp>
 // clang-format on
 
 using namespace vkl;
+using namespace poike;
 
 void GraphicCommandBuffers::createCommandBuffers() {
   m_commandBuffers.resize(m_renderPass.size());

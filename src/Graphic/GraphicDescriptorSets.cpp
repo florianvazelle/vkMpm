@@ -1,15 +1,12 @@
 // clang-format off
-#include <particle/Graphic/GraphicDescriptorSets.hpp>
+#include <Graphic/GraphicDescriptorSets.hpp>
 #include <stddef.h>                       // for size_t
-#include <common/VulkanHeader.hpp>           // for VkWriteDescriptorSet, vkUpd...
-#include <common/misc/DescriptorSet.hpp>  // for writeDescriptorSet
-#include <common/struct/MVP.hpp>          // for MVP
-#include <common/Device.hpp>              // for Device
-#include <common/QueueFamily.hpp>         // for vkl
-#include <common/buffer/IBuffer.hpp>      // for IUniformBuffers
+#include <struct/MVP.hpp>          // for MVP
+#include <poike/poike.hpp>
 // clang-format on
 
 using namespace vkl;
+using namespace poike;
 
 void GraphicDescriptorSets::createDescriptorSets() {
   allocateDescriptorSets();

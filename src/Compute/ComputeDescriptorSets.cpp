@@ -1,18 +1,13 @@
 // clang-format off
-#include <particle/Compute/ComputeDescriptorSets.hpp>
+#include <Compute/ComputeDescriptorSets.hpp>
 #include <stddef.h>                           // for size_t
-#include <common/VulkanHeader.hpp>               // for VkWriteDescriptorSet
-#include <common/misc/DescriptorSet.hpp>      // for writeDescriptorSet
-#include <common/struct/ComputeParticle.hpp>  // for ComputeParticle
-#include <common/struct/Particle.hpp>         // for Particle
-#include <common/Device.hpp>                  // for Device
-#include <common/QueueFamily.hpp>             // for vkl
-#include <common/buffer/IBuffer.hpp>          // for IBuffer, IUniformBuffers
-#include <common/DescriptorSetLayout.hpp>
-#include <common/DescriptorPool.hpp>
+#include <struct/ComputeParticle.hpp>  // for ComputeParticle
+#include <struct/Particle.hpp>         // for Particle
+#include <poike/poike.hpp>
 // clang-format on
 
 using namespace vkl;
+using namespace poike;
 
 void ComputeDescriptorSets::createDescriptorSets() {
   {

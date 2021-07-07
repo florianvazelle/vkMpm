@@ -1,25 +1,15 @@
 // clang-format off
-#include <particle/ParticleSystem.hpp>
+#include <ParticleSystem.hpp>
 #include <chrono>                                        // for duration
-#include <common/misc/DescriptorPool.hpp>                // for descriptorPo...
-#include <common/misc/DescriptorSetLayout.hpp>           // for descriptorSe...
 #include <cstdint>                                       // for uint32_t
 #include <cstring>                                       // for memcpy
 #include <deque>                                         // for deque
 #include <memory>                                        // for allocator_tr...
 #include <stdexcept>                                     // for runtime_error
-#include <common/Application.hpp>                        // for Application
-#include <common/DebugUtilsMessenger.hpp>                // for vkl
-#include <common/Device.hpp>                             // for Device
-#include <common/Semaphore.hpp>                          // for Semaphore
-#include <common/SwapChain.hpp>                          // for SwapChain
-#include <common/SyncObjects.hpp>                        // for SyncObjects
-#include <common/Window.hpp>                             // for Window
-#include <common/buffer/Buffer.hpp>                      // for Buffer
-#include <common/buffer/UniformBuffers.hpp>              // for UniformBuffers
-#include <common/struct/ComputeParticle.hpp>             // for ComputeParticle
-#include <common/struct/ParticleMVP.hpp>                 // for ParticleMVP
-#include <common/struct/Particle.hpp>                    // for Particle
+#include <poike/poike.hpp>
+#include <struct/ComputeParticle.hpp>             // for ComputeParticle
+#include <struct/ParticleMVP.hpp>                 // for ParticleMVP
+#include <struct/Particle.hpp>                    // for Particle
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #ifndef __ANDROID__
@@ -27,16 +17,16 @@
 #include <imgui_impl_glfw.h>                             // for ImGui_ImplGl...
 #include <imgui_impl_vulkan.h>                           // for ImGui_ImplVu...
 #endif
-#include <particle/Compute/ComputeCommandBuffer.hpp>     // for ComputeComma...
-#include <particle/Compute/ComputeDescriptorSets.hpp>    // for ComputeDescr...
-#include <particle/Graphic/GraphicDescriptorSets.hpp>    // for GraphicDescr...
-#include <particle/Graphic/GraphicGraphicsPipeline.hpp>  // for GraphicGraph...
+#include <Compute/ComputeCommandBuffer.hpp>     // for ComputeComma...
+#include <Compute/ComputeDescriptorSets.hpp>    // for ComputeDescr...
+#include <Graphic/GraphicDescriptorSets.hpp>    // for GraphicDescr...
+#include <Graphic/GraphicGraphicsPipeline.hpp>  // for GraphicGraph...
 #include <shadow/Basic/BasicRenderPass.hpp>              // for BasicRenderPass
-#include <common/buffer/IBuffer.hpp>                     // for IBuffer
 #include <glm/gtc/matrix_transform.hpp>
 // clang-format on
 
 using namespace vkl;
+using namespace poike;
 
 static bool isPause = true;
 

@@ -7,35 +7,24 @@
 
 #pragma once
 
-// clang-format off
-#include <common/VulkanHeader.hpp>                          // for VkDescriptor...
-#include <common/Application.hpp>                        // for Application
-#include <common/CommandPool.hpp>                        // for CommandPool
-#include <common/DescriptorPool.hpp>                     // for DescriptorPool
-#ifndef __ANDROID__
-#include <common/ImGui/ImGuiApp.hpp>                     // for ImGuiApp
-#endif
-#include <common/DescriptorSetLayout.hpp>                // for DescriptorSe...
-#include <common/Semaphore.hpp>                          // for Semaphore
-#include <common/buffer/Buffer.hpp>                      // for Buffer
-#include <common/buffer/StorageBuffer.hpp>               // for StorageBuffer
-#include <common/buffer/UniformBuffers.hpp>              // for UniformBuffers
-#include <common/struct/ComputeParticle.hpp>             // for ComputeParticle
-#include <common/struct/ParticleMVP.hpp>                 // for ParticleMVP
-#include <common/struct/Particle.hpp>                    // for Particle
+#include <poike/poike.hpp>
+#include <struct/ComputeParticle.hpp>             // for ComputeParticle
+#include <struct/ParticleMVP.hpp>                 // for ParticleMVP
+#include <struct/Particle.hpp>                    // for Particle
 #include <cstdlib>                                       // for size_t
 #include <functional>                                    // for function
-#include <particle/Compute/ComputeCommandBuffer.hpp>     // for ComputeComma...
-#include <particle/Compute/MPMStorageBuffer.hpp>
-#include <particle/Compute/ComputeDescriptorSets.hpp>    // for ComputeDescr...
-#include <particle/Compute/ComputePipeline.hpp>          // for ComputePipeline
-#include <particle/Graphic/GraphicCommandBuffers.hpp>    // for GraphicComma...
-#include <particle/Graphic/GraphicDescriptorSets.hpp>    // for GraphicDescr...
-#include <particle/Graphic/GraphicGraphicsPipeline.hpp>  // for GraphicGraph...
+#include <Compute/ComputeCommandBuffer.hpp>     // for ComputeComma...
+#include <Compute/MPMStorageBuffer.hpp>
+#include <Compute/ComputeDescriptorSets.hpp>    // for ComputeDescr...
+#include <Compute/ComputePipeline.hpp>          // for ComputePipeline
+#include <Graphic/GraphicCommandBuffers.hpp>    // for GraphicComma...
+#include <Graphic/GraphicDescriptorSets.hpp>    // for GraphicDescr...
+#include <Graphic/GraphicGraphicsPipeline.hpp>  // for GraphicGraph...
 #include <shadow/Basic/BasicRenderPass.hpp>              // for BasicRenderPass
 #include <string>                                        // for string
 #include <vector>                                        // for vector
-// clang-format on
+
+using namespace poike;
 
 namespace vkl {
   class ParticleSystem : public Application {

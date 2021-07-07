@@ -1,7 +1,7 @@
 #ifndef PARTICLE_HPP
 #define PARTICLE_HPP
 
-#include <common/VulkanHeader.hpp>
+#include <poike/poike.hpp>
 #include <glm/glm.hpp>
 #include <iostream>
 #include <vector>

@@ -3,9 +3,9 @@
 #include <cxxopts.hpp>                  // for OptionAdder, Options, ParseRe...
 #include <iostream>                     // for operator<<, cout, endl, ostream
 #include <memory>                       // for allocator, shared_ptr
-#include <particle/ParticleSystem.hpp>  // for glfwInit, glfwTerminate, glfw...
+#include <ParticleSystem.hpp>  // for glfwInit, glfwTerminate, glfw...
 #include <string>                       // for string
-#include <common/Application.hpp>       // for DebugOption
+#include <poike/poike.hpp>
 // clang-format on
 
 int main(int argc, char** argv) {
@@ -33,7 +33,7 @@ int main(int argc, char** argv) {
     debugLevel = result["debug"].as<int>();
   }
 
-  vkl::DebugOption debugOption = {
+  poike::DebugOption debugOption = {
       .debugLevel  = debugLevel,
       .exitOnError = result.count("error-exit") > 0,
   };

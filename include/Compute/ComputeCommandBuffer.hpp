@@ -1,19 +1,10 @@
 #ifndef COMPUTECOMMANDBUFFER_HPP
 #define COMPUTECOMMANDBUFFER_HPP
 
-// clang-format off
-#include <common/VulkanHeader.hpp>  // for VkCommandBuffer, VkCommandBuffer_T
-#include <common/NoCopy.hpp>       // for NoCopy
-#include <common/buffer/IBuffer.hpp> 
-namespace vkl { class CommandPool; }
-namespace vkl { class ComputePipeline; }
-namespace vkl { class DescriptorSets; }
-namespace vkl { class Device; }
-namespace vkl { class RenderPass; }
-namespace vkl { class StorageBuffer; }
-namespace vkl { class Semaphore; }
+#include <poike/poike.hpp>
 #include <vector>
-// clang-format on
+
+using namespace poike;
 
 namespace vkl {
 

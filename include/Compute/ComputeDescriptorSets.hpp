@@ -1,17 +1,9 @@
 #ifndef COMPUTEDESCRIPTORSETS_HPP
 #define COMPUTEDESCRIPTORSETS_HPP
 
-// clang-format off
-#include <common/DescriptorSets.hpp>  // for DescriptorSets
+#include <poike/poike.hpp>
 #include <vector>                     // for vector
-namespace vkl { class DescriptorPool; }
-namespace vkl { class DescriptorSetLayout; }
-namespace vkl { class Device; }
-namespace vkl { class IBuffer; }
-namespace vkl { class RenderPass; }
-namespace vkl { class IUniformBuffers; }
-namespace vkl { class SwapChain; }
-// clang-format on
+using namespace poike;
 
 namespace vkl {
 

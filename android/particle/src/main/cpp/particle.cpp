@@ -1,7 +1,7 @@
 #include <android/log.h>
 #include <android_native_app_glue.h>
 #include <memory>
-#include <particle/ParticleSystem.hpp>
+#include <ParticleSystem.hpp>
 
 std::unique_ptr<vkl::ParticleSystem> particle;
 bool launch = false;

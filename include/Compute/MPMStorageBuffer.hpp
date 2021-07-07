@@ -1,13 +1,9 @@
 #pragma once
 
 #include <time.h>
-#include <common/CommandBuffers.hpp>
-#include <common/CommandPool.hpp>
-#include <common/Device.hpp>
-#include <common/buffer/Buffer.hpp>
-#include <common/buffer/StorageBuffer.hpp>
-#include <common/struct/Cell.hpp>
-#include <common/struct/Particle.hpp>
+#include <poike/poike.hpp>
+#include <struct/Cell.hpp>
+#include <struct/Particle.hpp>
 
 #include <random>
 #include <vector>
@@ -18,6 +14,8 @@
 #define ELASTIC_LAMBDA 10.0f
 #define ELASTIC_MU 20.0f
 #define DT 0.1f
+
+using namespace poike;
 
 namespace vkl {
 

@@ -1,13 +1,9 @@
 #ifndef GRAPHICGRAPHICSPIPELINE_HPP
 #define GRAPHICGRAPHICSPIPELINE_HPP
 
-// clang-format off
-#include <common/GraphicsPipeline.hpp>  // for GraphicsPipeline
-namespace vkl { class DescriptorSetLayout; }
-namespace vkl { class Device; }
-namespace vkl { class RenderPass; }
-namespace vkl { class SwapChain; }
-// clang-format on
+#include <poike/poike.hpp>
+
+using namespace poike;
 
 namespace vkl {
 

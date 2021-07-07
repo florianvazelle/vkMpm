@@ -1,20 +1,15 @@
 // clang-format off
-#include <particle/Compute/ComputeCommandBuffer.hpp>
-#include <stdexcept>                             // for runtime_error
-#include <common/CommandPool.hpp>                // for CommandPool, vkl
-#include <common/DescriptorSets.hpp>             // for DescriptorSets
-#include <common/Device.hpp>                     // for Device
-#include <common/buffer/StorageBuffer.hpp>       // for StorageBuffer
-#include <common/struct/Particle.hpp>            // for Particle
-#include <particle/Compute/ComputePipeline.hpp>  // for ComputePipeline
-#include <common/RenderPass.hpp>                 // for RenderPass
-#include <common/CommandBuffers.hpp>
-#include <common/Device.hpp>
-#include <common/Semaphore.hpp>
-#include <particle/Compute/MPMStorageBuffer.hpp>
+#include <Compute/ComputeCommandBuffer.hpp>
+#include <stdexcept>      
+#include <struct/Particle.hpp>            // for Particle
+#include <Compute/ComputePipeline.hpp>  // for ComputePipeline
+#include <poike/poike.hpp>
+#include <Compute/MPMStorageBuffer.hpp>
 // clang-format on
 
 // https://community.khronos.org/t/why-i-am-getting-this-validator-message-memory-buffer-barrier/106638
+
+using namespace poike;
 
 using namespace vkl;
 

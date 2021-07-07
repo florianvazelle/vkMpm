@@ -1,7 +1,7 @@
 #ifndef PARTICLEMVP_HPP
 #define PARTICLEMVP_HPP
 
-#include <common/struct/MVP.hpp>
+#include <struct/MVP.hpp>
 #include <glm/glm.hpp>
 
 namespace vkl {

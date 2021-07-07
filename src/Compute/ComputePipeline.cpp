@@ -1,15 +1,10 @@
 // clang-format off
-#include <particle/Compute/ComputePipeline.hpp>
+#include <Compute/ComputePipeline.hpp>
 #include <ClearGrid_comp.h>    
 #include <P2G_comp.h>        
 #include <UpdateGrid_comp.h>   
 #include <G2P_comp.h>   
-#include <common/DescriptorSetLayout.hpp>    // for DescriptorSetLayout
-#include <common/Device.hpp>                 // for Device
-#include <common/GraphicsPipeline.hpp>       // for GraphicsPipeline
-#include <common/SwapChain.hpp>              // for vkl
-#include <common/misc/GraphicsPipeline.hpp>  // for pipelineShaderStageCreat...
-#include <common/misc/Specialization.hpp>
+#include <poike/poike.hpp>
 #include <glm/glm.hpp>
 #include <stdexcept>                         // for runtime_error
 #include <map>
@@ -17,6 +12,7 @@
 // clang-format on
 
 using namespace vkl;
+using namespace poike;
 
 ComputePipeline::ComputePipeline(const Device& device,
                                  const SwapChain& swapChain,

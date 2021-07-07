@@ -1,20 +1,15 @@
 // clang-format off
-#include <particle/Graphic/GraphicGraphicsPipeline.hpp>
+#include <Graphic/GraphicGraphicsPipeline.hpp>
 #include <particle_frag.h>                   // for PARTICLE_FRAG
 #include <particle_vert.h>                   // for PARTICLE_VERT
-#include <common/VulkanHeader.hpp>              // for VkPipelineShaderStageCre...
-#include <common/DescriptorSetLayout.hpp>    // for DescriptorSetLayout
-#include <common/Device.hpp>                 // for Device
-#include <common/RenderPass.hpp>             // for RenderPass
-#include <common/SwapChain.hpp>              // for vkl
-#include <common/misc/GraphicsPipeline.hpp>  // for pipelineShaderStageCreat...
-#include <common/struct/Particle.hpp>        // for Particle
+#include <struct/Particle.hpp>        // for Particle
 #include <stdexcept>                         // for runtime_error
 #include <vector>                            // for vector
-#include <common/GraphicsPipeline.hpp>       // for GraphicsPipeline
+#include <poike/poike.hpp>
 // clang-format on
 
 using namespace vkl;
+using namespace poike;
 
 GraphicGraphicsPipeline::GraphicGraphicsPipeline(const Device& device,
                                                  const SwapChain& swapChain,

@@ -1,17 +1,10 @@
 #ifndef GRAPHICCOMMANDBUFFERS_HPP
 #define GRAPHICCOMMANDBUFFERS_HPP
 
-// clang-format off
-#include <common/CommandBuffers.hpp>  // for CommandBuffers
-#include <vector>                     // for vector
-namespace vkl { class CommandPool; }
-namespace vkl { class DescriptorSets; }
-namespace vkl { class Device; }
-namespace vkl { class GraphicsPipeline; }
-namespace vkl { class IBuffer; }
-namespace vkl { class RenderPass; }
-namespace vkl { class SwapChain; }
-// clang-format on
+#include <poike/poike.hpp>
+#include <vector>  // for vector
+
+using namespace poike;
 
 namespace vkl {
 
