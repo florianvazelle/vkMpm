@@ -2,6 +2,7 @@
 #define COMPUTECOMMANDBUFFER_HPP
 
 #include <poike/poike.hpp>
+#include <Compute/ComputePipeline.hpp>
 #include <vector>
 
 using namespace poike;

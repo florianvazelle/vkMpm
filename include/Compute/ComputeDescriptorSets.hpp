@@ -2,7 +2,8 @@
 #define COMPUTEDESCRIPTORSETS_HPP
 
 #include <poike/poike.hpp>
-#include <vector>                     // for vector
+#include <vector>  
+
 using namespace poike;
 
 namespace vkl {

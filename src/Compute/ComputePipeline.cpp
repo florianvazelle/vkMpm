@@ -1,9 +1,9 @@
 // clang-format off
 #include <Compute/ComputePipeline.hpp>
-#include <ClearGrid_comp.h>    
-#include <P2G_comp.h>        
-#include <UpdateGrid_comp.h>   
-#include <G2P_comp.h>   
+#include <clear_grid_comp.h>    
+#include <particle_to_grid_comp.h>        
+#include <update_grid_comp.h>   
+#include <grid_to_particle_comp.h>   
 #include <poike/poike.hpp>
 #include <glm/glm.hpp>
 #include <stdexcept>                         // for runtime_error
@@ -58,7 +58,7 @@ void ComputePipeline::createPipeline() {
   };
 
   {  // 1st pass
-    VkShaderModule compShaderModule = createShaderModule(CLEARGRID_COMP);
+    VkShaderModule compShaderModule = createShaderModule(CLEAR_GRID_COMP);
     computePipelineCreateInfo.stage
         = misc::pipelineShaderStageCreateInfo(compShaderModule, VK_SHADER_STAGE_COMPUTE_BIT);
 
@@ -72,7 +72,7 @@ void ComputePipeline::createPipeline() {
   }
 
   {  // 2nd pass
-    VkShaderModule compShaderModule = createShaderModule(P2G_COMP);
+    VkShaderModule compShaderModule = createShaderModule(PARTICLE_TO_GRID_COMP);
     computePipelineCreateInfo.stage
         = misc::pipelineShaderStageCreateInfo(compShaderModule, VK_SHADER_STAGE_COMPUTE_BIT);
 
@@ -86,7 +86,7 @@ void ComputePipeline::createPipeline() {
   }
 
   {  // 1st pass
-    VkShaderModule compShaderModule = createShaderModule(UPDATEGRID_COMP);
+    VkShaderModule compShaderModule = createShaderModule(UPDATE_GRID_COMP);
     computePipelineCreateInfo.stage
         = misc::pipelineShaderStageCreateInfo(compShaderModule, VK_SHADER_STAGE_COMPUTE_BIT);
 
@@ -100,7 +100,7 @@ void ComputePipeline::createPipeline() {
   }
   {
     // 2nd pass
-    VkShaderModule compShaderModule = createShaderModule(G2P_COMP);
+    VkShaderModule compShaderModule = createShaderModule(GRID_TO_PARTICLE_COMP);
     computePipelineCreateInfo.stage
         = misc::pipelineShaderStageCreateInfo(compShaderModule, VK_SHADER_STAGE_COMPUTE_BIT);
 

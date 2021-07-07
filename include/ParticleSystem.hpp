@@ -20,7 +20,7 @@
 #include <Graphic/GraphicCommandBuffers.hpp>    // for GraphicComma...
 #include <Graphic/GraphicDescriptorSets.hpp>    // for GraphicDescr...
 #include <Graphic/GraphicGraphicsPipeline.hpp>  // for GraphicGraph...
-#include <shadow/Basic/BasicRenderPass.hpp>              // for BasicRenderPass
+#include <Graphic/GraphicRenderPass.hpp>              // for GraphicRenderPass
 #include <string>                                        // for string
 #include <vector>                                        // for vector
 
@@ -65,7 +65,7 @@ namespace vkl {
     std::vector<const IBuffer*> vecSBCompute;
 
     // Graphic
-    BasicRenderPass rpGraphic;
+    GraphicRenderPass rpGraphic;
 
     DescriptorSetLayout dslGraphic;
     GraphicGraphicsPipeline gpGraphic;

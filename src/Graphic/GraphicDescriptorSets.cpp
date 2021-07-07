@@ -1,7 +1,7 @@
 // clang-format off
 #include <Graphic/GraphicDescriptorSets.hpp>
 #include <stddef.h>                       // for size_t
-#include <struct/MVP.hpp>          // for MVP
+#include <Struct/MVP.hpp>          // for MVP
 #include <poike/poike.hpp>
 // clang-format on
 
