@@ -5,7 +5,7 @@
 #include <poike/poike.hpp>
 // clang-format on
 
-using namespace vkl;
+using namespace vkm;
 using namespace poike;
 
 void GraphicDescriptorSets::createDescriptorSets() {

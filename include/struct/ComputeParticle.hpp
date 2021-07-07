@@ -1,7 +1,7 @@
 #ifndef COMPUTE_PARTICLE_HPP
 #define COMPUTE_PARTICLE_HPP
 
-namespace vkl {
+namespace vkm {
 
   struct alignas(16) ComputeParticle {
     float deltaT;  // Frame delta time
@@ -10,6 +10,6 @@ namespace vkl {
     float elastic_mu;
   };
 
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // COMPUTE_PARTICLE_HPP

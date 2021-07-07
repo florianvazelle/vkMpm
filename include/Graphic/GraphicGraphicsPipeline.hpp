@@ -5,7 +5,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
 
   class GraphicGraphicsPipeline : public GraphicsPipeline {
   public:
@@ -18,6 +18,6 @@ namespace vkl {
   private:
     void createPipeline() final;
   };
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // GRAPHICGRAPHICSPIPELINE_HPP

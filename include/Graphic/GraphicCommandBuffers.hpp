@@ -6,7 +6,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
 
   class GraphicCommandBuffers : public CommandBuffers {
   public:
@@ -25,6 +25,6 @@ namespace vkl {
     void createCommandBuffers() final;
   };
 
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // GRAPHICCOMMANDBUFFERS_HPP

@@ -8,7 +8,7 @@
 #include <vector>
 
 using namespace poike;
-using namespace vkl;
+using namespace vkm;
 
 GraphicRenderPass::GraphicRenderPass(const Device& device, const SwapChain& swapChain) : RenderPass(device, swapChain) {
   createRenderPass();

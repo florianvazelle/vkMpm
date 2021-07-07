@@ -7,7 +7,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
 
   class ComputeCommandBuffer : public NoCopy {
   public:
@@ -39,6 +39,6 @@ namespace vkl {
     VkCommandBuffer allocCommandBuffer(VkCommandBufferLevel level, VkCommandPool pool, bool begin = false) const;
   };
 
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // COMPUTECOMMANDBUFFER_HPP

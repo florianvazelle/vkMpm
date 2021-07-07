@@ -7,7 +7,7 @@
 #include <Compute/MPMStorageBuffer.hpp>
 // clang-format on
 
-using namespace vkl;
+using namespace vkm;
 using namespace poike;
 
 void GraphicCommandBuffers::createCommandBuffers() {

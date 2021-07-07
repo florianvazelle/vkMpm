@@ -26,7 +26,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
   class ParticleSystem : public Application {
   public:
     ParticleSystem(
@@ -92,4 +92,4 @@ namespace vkl {
     void recreateSwapChain(bool& framebufferResized) final;
   };
 
-}  // namespace vkl
+}  // namespace vkm

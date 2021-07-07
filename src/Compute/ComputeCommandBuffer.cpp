@@ -11,7 +11,7 @@
 
 using namespace poike;
 
-using namespace vkl;
+using namespace vkm;
 
 ComputeCommandBuffer::ComputeCommandBuffer(const Device& device,
                                            const RenderPass& renderPass,

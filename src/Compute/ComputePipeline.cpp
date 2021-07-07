@@ -11,7 +11,7 @@
 #include <iostream>
 // clang-format on
 
-using namespace vkl;
+using namespace vkm;
 using namespace poike;
 
 ComputePipeline::ComputePipeline(const Device& device,

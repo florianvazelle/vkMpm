@@ -17,7 +17,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
 
   static float elastic_lambda = ELASTIC_LAMBDA;
   static float elastic_mu     = ELASTIC_MU;
@@ -259,4 +259,4 @@ namespace vkl {
           });
     }
   };
-}  // namespace vkl
+}  // namespace vkm

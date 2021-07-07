@@ -5,7 +5,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
   class GraphicRenderPass : public RenderPass {
   public:
     GraphicRenderPass(const Device& device, const SwapChain& swapChain);
@@ -14,6 +14,6 @@ namespace vkl {
     void createRenderPass() final;
     void createFrameBuffers() final;
   };
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // GRAPHICRENDERPASS_HPP

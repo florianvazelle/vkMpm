@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-namespace vkl {
+namespace vkm {
 
   struct alignas(16) Cell {
     alignas(8) glm::vec2 vel;  // velocity
@@ -11,6 +11,6 @@ namespace vkl {
     alignas(4) float padding;
   };
 
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // CELL_HPP

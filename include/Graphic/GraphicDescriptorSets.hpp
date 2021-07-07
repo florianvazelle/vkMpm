@@ -6,7 +6,7 @@
 
 using namespace poike;
 
-namespace vkl {
+namespace vkm {
 
   class GraphicDescriptorSets : public DescriptorSets {
   public:
@@ -28,6 +28,6 @@ namespace vkl {
   private:
     void createDescriptorSets() final;
   };
-}  // namespace vkl
+}  // namespace vkm
 
 #endif  // GRAPHICDESCRIPTORSETS_HPP
