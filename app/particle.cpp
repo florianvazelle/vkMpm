@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
     return 0;
   }
 
-  vkl::ParticleSystem::initialize();
+  vkm::ParticleSystem::initialize();
 
   int debugLevel = 0;
   if (result.count("debug")) {
@@ -38,7 +38,7 @@ int main(int argc, char** argv) {
       .exitOnError = result.count("error-exit") > 0,
   };
 
-  vkl::ParticleSystem app("vkLavaMpm", debugOption);
+  vkm::ParticleSystem app("vkLavaMpm", debugOption);
 
   try {
     app.run();
@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
     return EXIT_FAILURE;
   }
 
-  vkl::ParticleSystem::terminate();
+  vkm::ParticleSystem::terminate();
 
   return EXIT_SUCCESS;
 }

@@ -3,7 +3,7 @@
 #include <memory>
 #include <ParticleSystem.hpp>
 
-std::unique_ptr<vkl::ParticleSystem> particle;
+std::unique_ptr<vkm::ParticleSystem> particle;
 bool launch = false;
 
 // Process the next main command.
@@ -14,12 +14,12 @@ void handle_cmd(android_app* app, int32_t cmd) {
     // The window is being shown, get it ready.
     __android_log_print(ANDROID_LOG_INFO, "handle_cmd", "APP_CMD_INIT_WINDOW");
 
-    vkl::DebugOption debugOption = {
+    poike::DebugOption debugOption = {
         .debugLevel  = 0,
         .exitOnError = false,
     };
 
-    particle = std::make_unique<vkl::ParticleSystem>(app, "vkLavaMpm", debugOption);
+    particle = std::make_unique<vkm::ParticleSystem>(app, "vkLavaMpm", debugOption);
 
     launch = true;
   } else if (cmd == APP_CMD_TERM_WINDOW) {
